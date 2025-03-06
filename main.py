@@ -2,6 +2,7 @@ import asyncio
 import uvicorn
 from fastapi import FastAPI
 
+from config import HOST
 from database import Base, engine
 from routes.authentication import router as auth_router
 from routes.user import router as user_router
@@ -18,7 +19,7 @@ async def main():
     async with engine.begin() as connect:
         await connect.run_sync(Base.metadata.create_all)
 
-    uvicorn.run(app='main:app', reload=True)
+    uvicorn.run(app='main:app', reload=True, host=HOST)
 
 
 if __name__ == '__main__':

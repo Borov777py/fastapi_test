@@ -1,14 +1,14 @@
 import json
 from sqlalchemy.ext.asyncio import AsyncAttrs, AsyncSession, async_sessionmaker, create_async_engine
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-from sqlalchemy import BigInteger, String, ForeignKey
+from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from sqlalchemy import String
 from typing import Annotated
 from fastapi import Depends
 from redis import Redis
 
-from config import PG_URL, REDIS_HOST, REDIS_PASSWORD
+from config import PG_URL, HOST, REDIS_PASSWORD
 
-redis_ = Redis(REDIS_HOST, 6379, password=REDIS_PASSWORD, decode_responses=True)
+redis_ = Redis(HOST, 6379, password=REDIS_PASSWORD, decode_responses=True)
 
 engine = create_async_engine(url=PG_URL)
 
