@@ -19,7 +19,7 @@ async def main():
     async with engine.begin() as connect:
         await connect.run_sync(Base.metadata.create_all)
 
-    uvicorn.run(app='main:app', reload=True, host=HOST)
+    uvicorn.run(app='main:app', reload=True, host='0.0.0.0')
 
 
 if __name__ == '__main__':
