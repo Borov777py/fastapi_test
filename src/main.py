@@ -9,9 +9,9 @@ from src.api.messages import router as chat_router
 
 app = FastAPI()
 
-app.include_router(auth_router)
-app.include_router(user_router)
-app.include_router(chat_router)
+
+for router in (auth_router, user_router, chat_router):
+    app.include_router(router)
 
 
 async def main():

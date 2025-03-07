@@ -17,7 +17,7 @@ MessagesService = Annotated[MessagesService, Depends(messages_service)]
 async def add_message(data: MessageAddSchema, request: Request, users_service: UsersService, messages_service: MessagesService):
     if (user_id := request.cookies.get('id')) is not None:
         if (user := await users_service.get_user_is_id(int(user_id))) is not None:
-            if messages_service.add_new_message(user.name, data):
+            if messages_service.add_new_message(user.name, data) is not False:
                 return {'message': 'Сообщение отправлено!'}
 
             raise HTTPException(status_code=status.HTTP_409_CONFLICT, detail='Сообщение не было отправлено!')
