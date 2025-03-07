@@ -29,6 +29,3 @@ class UserDataSchema(BaseModel):
                 'balance': 0
             }
         }
-
-
-

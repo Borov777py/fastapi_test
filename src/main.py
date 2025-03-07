@@ -2,10 +2,10 @@ import asyncio
 import uvicorn
 from fastapi import FastAPI
 
-from database import Base, engine
-from routes.authentication import router as auth_router
-from routes.user import router as user_router
-from routes.chat import router as chat_router
+from src.db.database import Base, engine
+from src.api.authentication import router as auth_router
+from src.api.users import router as user_router
+from src.api.messages import router as chat_router
 
 app = FastAPI()
 
@@ -26,5 +26,3 @@ if __name__ == '__main__':
         asyncio.run(main())
     except KeyboardInterrupt:
         print('Closed')
-
-
