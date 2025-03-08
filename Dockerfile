@@ -6,4 +6,4 @@ COPY . /app
 RUN pip install poetry
 RUN poetry install
 
-CMD [ "python", "/app/main.py" ]
+CMD [ "poetry", "run", "python", "/app/main.py" ]
