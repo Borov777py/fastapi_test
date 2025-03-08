@@ -8,9 +8,9 @@ class MessagesService:
     @classmethod
     def add_new_message(cls, send_name: str, data: MessageAddSchema):
         message = f'{send_name}: {data.message}'
-        if cls.storage.add_message(message) is not False:
-            return True
-        return False
+        if cls.storage.add_message(message) is False:
+            return False
+        return True
 
     @classmethod
     def get_messages(cls):
