@@ -1,16 +1,10 @@
-from fastapi import APIRouter, HTTPException, Request, Depends, status
-from typing import Annotated
+from fastapi import APIRouter, HTTPException, Request, status
 
-from src.api.dependecies import messages_service, users_service
-from src.services.users import UsersService
-from src.services.messages import MessagesService
+from src.api.dependencies import MessagesService, UsersService
 from src.schemas.messages import MessageAddSchema
 
 
 router = APIRouter(prefix='/chat', tags=['Chat'])
-
-UsersService = Annotated[UsersService, Depends(users_service)]
-MessagesService = Annotated[MessagesService, Depends(messages_service)]
 
 
 @router.post(path='/new_message')

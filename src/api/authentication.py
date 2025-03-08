@@ -1,16 +1,15 @@
-from fastapi import APIRouter, HTTPException, Response, Depends, status
+from fastapi import APIRouter, HTTPException, Response, status
 from hashlib import sha256
 
+from src.api.dependencies import UsersService
 from src.schemas.users import UserAuthSchema
-from src.services.users import UsersService
-from src.api.dependecies import users_service
 
 
 router = APIRouter(prefix='/auth', tags=['Authentication'])
 
 
 @router.post(path='/registration')
-async def registration(data: UserAuthSchema, users_service: UsersService = Depends(users_service)):
+async def registration(data: UserAuthSchema, users_service: UsersService):
     if await users_service.get_user_is_name(data.name) is None:
         data.password = sha256(data.password.encode()).hexdigest()
         await users_service.add_user(data)
@@ -20,7 +19,7 @@ async def registration(data: UserAuthSchema, users_service: UsersService = Depen
 
 
 @router.post(path='/authorization')
-async def authorization(data: UserAuthSchema, response: Response, users_service: UsersService = Depends(users_service)):
+async def authorization(data: UserAuthSchema, response: Response, users_service: UsersService):
     if (user := await users_service.get_user_is_name(data.name)) is not None:
         hash_password = sha256(data.password.encode()).hexdigest()
         if user.password == hash_password:

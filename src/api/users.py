@@ -1,7 +1,6 @@
-from fastapi import APIRouter, HTTPException, Request, Depends, status
+from fastapi import APIRouter, HTTPException, Request, status
 
-from src.services.users import UsersService
-from src.api.dependecies import users_service
+from src.api.dependencies import UsersService
 from src.schemas.users import UserDataSchema
 
 
@@ -9,7 +8,7 @@ router = APIRouter(prefix='/user', tags=['User'])
 
 
 @router.get(path='/{user_id}', response_model=UserDataSchema)
-async def get_data_user(user_id: int, users_service: UsersService = Depends(users_service)):
+async def get_data_user(user_id: int, users_service: UsersService):
     if (user := await users_service.get_user_is_id(user_id)) is not None:
         return user
 
@@ -17,7 +16,7 @@ async def get_data_user(user_id: int, users_service: UsersService = Depends(user
 
 
 @router.get(path='/', response_model=UserDataSchema)
-async def get_my_data(request: Request, users_service: UsersService = Depends(users_service)):
+async def get_my_data(request: Request, users_service: UsersService):
     if (user_id := request.cookies.get('id')) is not None:
         if (user := await users_service.get_user_is_id(int(user_id))) is not None:
             return user
