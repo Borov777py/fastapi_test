@@ -1,22 +1,22 @@
-from typing import Type
-
 from schemas.users import UserAuthSchema, UserDataSchema
-from utils.repository import Repository
+from db.database import Repository
 from models.users import UserModel
 
 
 class UsersService:
-    def __init__(self, model: Type[UserModel]):
-        self.repository = Repository(model)
+    repository = Repository(UserModel)
 
-    async def add_user(self, data: UserAuthSchema):
+    @classmethod
+    async def add_user(cls, data: UserAuthSchema):
         data_dict = data.model_dump()
-        await self.repository.add_one(data_dict)
+        await cls.repository.add_one(data_dict)
 
-    async def get_user_is_id(self, id_: int):
-        result = await self.repository.get_one_is_id(id_)
+    @classmethod
+    async def get_user_is_id(cls, id_: int):
+        result = await cls.repository.get_one_is_id(id_)
         return result
 
-    async def get_user_is_name(self, name: str):
-        result = await self.repository.get_one_is_name(name)
+    @classmethod
+    async def get_user_is_name(cls, name: str):
+        result = await cls.repository.get_one_is_name(name)
         return result
