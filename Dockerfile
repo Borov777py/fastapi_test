@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY . /app
 RUN pip install poetry
-RUN poetry install
+RUN poetry config virtualenvs.in-project true
+RUN poetry install --no-root
 
 CMD [ "poetry", "run", "python", "/app/main.py" ]
