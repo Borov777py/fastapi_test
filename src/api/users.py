@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request, status
 
-from src.api.dependencies import UsersService
-from src.schemas.users import UserDataSchema
+from api.dependencies import UsersService
+from schemas.users import UserDataSchema
 
 
 router = APIRouter(prefix='/user', tags=['User'])

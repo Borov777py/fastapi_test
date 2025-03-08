@@ -1,8 +1,8 @@
 from typing import Type
 
-from src.schemas.users import UserAuthSchema, UserDataSchema
-from src.utils.repository import Repository
-from src.models.users import UserModel
+from schemas.users import UserAuthSchema, UserDataSchema
+from utils.repository import Repository
+from models.users import UserModel
 
 
 class UsersService:

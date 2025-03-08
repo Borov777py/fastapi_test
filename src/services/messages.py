@@ -1,7 +1,7 @@
 from typing import Type
 
-from src.schemas.messages import MessageAddSchema
-from src.utils.storage import Storage
+from schemas.messages import MessageAddSchema
+from utils.storage import Storage
 
 
 class MessagesService:

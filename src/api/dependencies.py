@@ -1,10 +1,10 @@
 from typing import Annotated
 from fastapi import Depends
 
-from src.services.users import UsersService
-from src.services.messages import MessagesService
-from src.models.users import UserModel
-from src.utils.storage import Storage
+from services.users import UsersService
+from services.messages import MessagesService
+from models.users import UserModel
+from utils.storage import Storage
 
 
 UsersService = Annotated[UsersService, Depends(lambda: UsersService(UserModel))]

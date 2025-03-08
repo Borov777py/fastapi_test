@@ -1,7 +1,7 @@
 from sqlalchemy import select
 
 
-from src.db.database import new_session
+from db.database import new_session
 
 
 class Repository:

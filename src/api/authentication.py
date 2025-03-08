@@ -1,8 +1,8 @@
 from fastapi import APIRouter, HTTPException, Response, status
 from hashlib import sha256
 
-from src.api.dependencies import UsersService
-from src.schemas.users import UserAuthSchema
+from api.dependencies import UsersService
+from schemas.users import UserAuthSchema
 
 
 router = APIRouter(prefix='/auth', tags=['Authentication'])

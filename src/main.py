@@ -2,10 +2,10 @@ import asyncio
 import uvicorn
 from fastapi import FastAPI
 
-from src.db.database import Base, engine
-from src.api.authentication import router as auth_router
-from src.api.users import router as user_router
-from src.api.messages import router as chat_router
+from db.database import Base, engine
+from api.authentication import router as auth_router
+from api.users import router as user_router
+from api.messages import router as chat_router
 
 app = FastAPI()
 

@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Request, status
 
-from src.api.dependencies import MessagesService, UsersService
-from src.schemas.messages import MessageAddSchema
+from api.dependencies import MessagesService, UsersService
+from schemas.messages import MessageAddSchema
 
 
 router = APIRouter(prefix='/chat', tags=['Chat'])

@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import String
 
-from src.db.database import Base
-from src.schemas.users import UserDataSchema
+from db.database import Base
+from schemas.users import UserDataSchema
 
 
 class UserModel(Base):
