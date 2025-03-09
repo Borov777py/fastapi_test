@@ -39,5 +39,6 @@ services:
       - .redis:/data
       - ./redis.conf:/usr/local/etc/redis.conf
     restart: always
+    command: [redis-server, /usr/local/etc/redis.conf]
     env_file:
       - .env
