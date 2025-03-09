@@ -2,8 +2,6 @@ import redis
 import json
 import os
 
-# from config import HOST, REDIS_PASSWORD
-
 
 class Storage:
     redis = redis.Redis(host=os.environ['REDIS_HOST'], port=os.environ['REDIS_PORT'], password=os.environ['REDIS_PASSWORD'], decode_responses=True)
