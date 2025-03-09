@@ -25,8 +25,6 @@ services:
     volumes:
       - .postgres:/var/lib/postgres/data
     restart: always
-    networks:
-      - postgres
     env_file:
       - .env
 
@@ -39,37 +37,10 @@ services:
       - ${REDIS_PORT}:6379
     volumes:
       - .redis:/data
-      # - ./redis.conf:/usr/local/etc/redis.conf
+      - ./redis.conf:/usr/local/etc/redis.conf
     restart: always
-    command: >
-      sh -c '
-        mkdir -p /usr/local/etc/redis &&
-        echo "bind 0.0.0.0" > /usr/local/etc/redis/redis.conf &&
-        echo "requirepass $REDIS_PASSWORD" >> /usr/local/etc/redis/redis.conf
-      '
-    # command: [redis-server, /usr/local/etc/redis.conf]
+    command: [redis-server, /usr/local/etc/redis.conf]
     healthcheck:
       test: ["CMD", "redis-cli", "-a", "$REDIS_PASSWORD", "set", "messages", "[]"]
     env_file:
       - .env
-
-  pgadmin:
-    container_name: my_pgadmin
-    image: dpage/pgadmin4:7.2
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${ADMIN_EMAIL}
-      PGADMIN_DEFAULT_PASSWORD: ${ADMIN_PASSWORD}
-      PGADMIN_CONFIG_SERVER_MODE: "False"
-#    volumes:
-#      - pgadmin-data:/var/lib/pgadmin
-    ports:
-      - "5050:80"
-    restart: unless-stopped
-    networks:
-      - postgres
-    env_file:
-      - .env
-
-networks:
-  postgres:
-    driver: bridge
