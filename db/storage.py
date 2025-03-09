@@ -6,7 +6,7 @@ import os
 
 
 class Storage:
-    redis = redis.Redis('localhost', 6378, password=os.environ['REDIS_PASSWORD'], decode_responses=True)
+    redis = redis.Redis(os.environ['REDIS_HOST'], os.environ['REDIS_PORT'], password=os.environ['REDIS_PASSWORD'], decode_responses=True)
 
     @classmethod
     def get_data_messages(cls):
