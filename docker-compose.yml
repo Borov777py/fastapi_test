@@ -25,6 +25,8 @@ services:
     volumes:
       - .postgres:/var/lib/postgres/data
     restart: always
+    networks:
+      - postgres
     env_file:
       - .env
 
@@ -61,6 +63,10 @@ services:
           cpus: '0.5'
           memory: 1G
     networks:
-      - db
+      - postgres
     env_file:
       - .env
+
+networks:
+  postgres:
+    driver: bridge
