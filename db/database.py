@@ -2,10 +2,11 @@ from sqlalchemy.ext.asyncio import AsyncAttrs, async_sessionmaker, create_async_
 from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy import select
 from typing import Type
+import os
 
-from config import PG_URL
+# from config import PG_URL
 
-engine = create_async_engine(url=PG_URL)
+engine = create_async_engine(url=os.environ['PG_URL'])
 
 new_session = async_sessionmaker(engine)
 

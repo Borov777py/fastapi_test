@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: my_app
+    build: ./
+    depends_on:
+      - db
+      - storage
+    ports:
+      - ${APP_PORT}:8000
+    restart: always
+    env_file:
+      - .env
+
+  db:
+    container_name: my_postgres
+    image: postgres
+    environment:
+      - POSTGRES_DB = test
+      - POSTGRES_USER = ${DB_USER}
+      - POSTGRES_PASSWORD = ${DB_PASSWORD}
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - .postgres:/var/lib/postgres/data
+    restart: always
+
+  storage:
+    container_name: my_redis
+    image: redis:alpine
+    environment:
+      - REDIS_PASSWORD = ${REDIS_PASSWORD}
+    ports:
+      - ${REDIS_PORT}:6379
+    volumes:
+      - .redis:/data
+    restart: always
