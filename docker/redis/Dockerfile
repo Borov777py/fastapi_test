@@ -11,7 +11,6 @@ RUN cat /usr/local/etc/redis/redis.conf
 
 CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
 
-RUN redis-cli
-RUN AUTH $REDIS_PASSWORD
+RUN redis-cli --pass $REDIS_PASSWORD
 RUN SET messages []
 RUN exit
