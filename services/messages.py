@@ -8,7 +8,7 @@ from schemas.messages import MessageAddSchema
 class MessagesService:
     _key = 'messages'
 
-    _storage = redis.Redis(host=os.environ['REDIS_HOST'], port=os.environ['REDIS_PORT'], password=os.environ['REDIS_PASSWORD'], decode_responses=True)
+    _storage = redis.Redis(host=os.environ['HOST'], port=os.environ['REDIS_PORT'], password=os.environ['REDIS_PASSWORD'], decode_responses=True)
     _storage.auth(password=os.environ['REDIS_PASSWORD'])
 
     @classmethod

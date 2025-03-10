@@ -4,7 +4,7 @@ from sqlalchemy import select
 from typing import Type
 import os
 
-engine = create_async_engine(url=os.environ['PG_URL'])
+engine = create_async_engine(url=f"postgresql+asyncpg://{os.environ['DB_USER']}:{os.environ['DB_PASSWORD']}@{os.environ['HOST']}:{os.environ['DB_PORT']}/{os.environ['DB_NAME']}")
 
 new_session = async_sessionmaker(engine)
 
