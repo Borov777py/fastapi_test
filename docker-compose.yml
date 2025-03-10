@@ -53,7 +53,5 @@ services:
 
     restart: always
 
-    command: [redis-server, /usr/local/etc/redis.conf]
-
     env_file:
       - .env
