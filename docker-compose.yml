@@ -43,7 +43,6 @@ services:
       dockerfile: docker/redis/Dockerfile
 
     environment:
-      REDIS_HOST: '0.0.0.0'
       REDIS_PASSWORD: ${REDIS_PASSWORD}
 
     ports:
@@ -52,7 +51,12 @@ services:
     volumes:
       - .redis:/data
 
-    command: ["redis-cli", "-a", "$REDIS_PASSWORD", "set", "messages", "[]"]
+    command:
+      - "mkdir -p /usr/local/etc/redis"
+      - 'echo "bind 0.0.0.0" > /usr/local/etc/redis/redis.conf'
+      - 'echo "requirepass $REDIS_PASSWORD" >> /usr/local/etc/redis/redis.conf'
+      - "redis-server /usr/local/etc/redis/redis.conf"
+      - "redis-cli -a $REDIS_PASSWORD set messages []"
 
     restart: always
 
