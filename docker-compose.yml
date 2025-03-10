@@ -42,7 +42,7 @@ services:
       context: .
       dockerfile: docker/redis/Dockerfile
       args:
-        - password = ${REDIS_PASSWORD}
+        password: ${REDIS_PASSWORD}
 
     environment:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
