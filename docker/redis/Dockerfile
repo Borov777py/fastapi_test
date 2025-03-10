@@ -7,6 +7,6 @@ RUN echo "requirepass $REDIS_PASSWORD" >> /usr/local/etc/redis/redis.conf
 CMD [ "redis-server", "/usr/local/etc/redis/redis.conf" ]
 
 RUN redis-cli
-RUN AUTH ${REDIS_PASSWORD}
+RUN AUTH $REDIS_PASSWORD
 RUN SET messages []
 RUN exit
