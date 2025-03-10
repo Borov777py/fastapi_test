@@ -54,8 +54,8 @@ services:
       - .redis:/data
 
     command:
-      [redis-server, /usr/local/etc/redis.conf]
-      [redis-cli, -a, $REDIS_PASSWORD, set, messages, []]
+      - "redis-server /usr/local/etc/redis.conf"
+      - "redis-cli -a $REDIS_PASSWORD set messages []"
 
     restart: always
 
