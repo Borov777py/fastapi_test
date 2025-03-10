@@ -43,7 +43,7 @@ services:
       dockerfile: docker/redis/Dockerfile
 
     environment:
-      REDIS_HOST: 0.0.0.0
+      REDIS_HOST: '0.0.0.0'
       REDIS_PASSWORD: ${REDIS_PASSWORD}
 
     ports:
@@ -51,6 +51,8 @@ services:
 
     volumes:
       - .redis:/data
+
+    command: ["redis-cli", "-a", "$REDIS_PASSWORD", "set", "messages", "[]"]
 
     restart: always
 
