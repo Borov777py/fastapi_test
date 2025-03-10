@@ -3,15 +3,22 @@ version: '3.8'
 services:
   app:
     container_name: my_app
-    build: ./
+
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile
+
+    restart: always
+
+    env_file:
+      - .env
+
+    ports:
+      - ${APP_PORT}:8000
+
     depends_on:
       - db
       - storage
-    ports:
-      - ${APP_PORT}:8000
-    restart: always
-    env_file:
-      - .env
 
   db:
     container_name: my_postgres
@@ -30,17 +37,23 @@ services:
 
   storage:
     container_name: my_redis
-    image: redis:alpine
+
+    build:
+      context: .
+      dockerfile: docker/redis/Dockerfile
+
     environment:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
+
     ports:
       - ${REDIS_PORT}:6379
+
     volumes:
       - .redis:/data
-      - ./redis.conf:/usr/local/etc/redis.conf
+
     restart: always
+
     command: [redis-server, /usr/local/etc/redis.conf]
-    healthcheck:
-      test: ["CMD", "redis-cli", "-a", "$REDIS_PASSWORD", "set", "messages", "[]"]
+
     env_file:
       - .env
