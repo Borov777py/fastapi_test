@@ -41,6 +41,8 @@ services:
     build:
       context: .
       dockerfile: docker/redis/Dockerfile
+      args:
+        - REDIS_PASSWORD = ${REDIS_PASSWORD}
 
     environment:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
@@ -51,12 +53,12 @@ services:
     volumes:
       - .redis:/data
 
-    command:
-      - "mkdir -p /usr/local/etc/redis"
-      - 'echo "bind 0.0.0.0" > /usr/local/etc/redis/redis.conf'
-      - 'echo "requirepass $REDIS_PASSWORD" >> /usr/local/etc/redis/redis.conf'
-      - "redis-server /usr/local/etc/redis/redis.conf"
-      - "redis-cli -a $REDIS_PASSWORD set messages []"
+#    command:
+#      - "mkdir -p /usr/local/etc/redis"
+#      - 'echo "bind 0.0.0.0" > /usr/local/etc/redis/redis.conf'
+#      - 'echo "requirepass $REDIS_PASSWORD" >> /usr/local/etc/redis/redis.conf'
+#      - "redis-server /usr/local/etc/redis/redis.conf"
+#      - "redis-cli -a $REDIS_PASSWORD set messages []"
 
     restart: always
 
