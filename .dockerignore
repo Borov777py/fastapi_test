@@ -1,5 +1,3 @@
 .venv/
 .git/
 .idea/
-.postgres/
-.redis/
