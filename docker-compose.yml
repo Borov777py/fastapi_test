@@ -53,10 +53,6 @@ services:
     volumes:
       - .redis:/data
 
-    command:
-      - "redis-server /usr/local/etc/redis/redis.conf"
-      - "redis-cli -a $REDIS_PASSWORD set messages []"
-
     restart: always
 
     env_file:
